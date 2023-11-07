@@ -1,22 +1,33 @@
-<ion-header [translucent]="true">
+<ion-header class="header" [translucent]="true">
   <ion-toolbar>
     <ion-title> Productos </ion-title>
-   
+    
   </ion-toolbar>
+  <div class="fab-container">
+
+    <ion-fab-button (click)="openAddProductPage()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button (click)="openLogin() "  *ngIf="!usuarioAutenticado">
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-fab-button>
+
+</div>
+
+  <div class="logeo">
+    <h3>{{this.usuario.username}}</h3>
+    <div class="imagen">
+      <img [src]="this.usuario.photo" id="imagenUser" alt=""/>
+      
+    </div>
+   
+  </div> 
+  <h3 *ngIf="usuarioAutenticado"><a (click)='cerrarsesion()'>Cerrar sesión</a></h3>
 </ion-header>
 
 <ion-content [fullscreen]="true">  
-  <ion-fab 
-  vertical="top" 
-  horizontal="end" 
-  slot="fixed" 
-  [edge]="true">
-    <ion-fab-button (click)="openAddProductPage()">
-      <ion-icon name="add"></ion-icon>
-      
-    </ion-fab-button>
 
-  </ion-fab>
   <ion-grid>
     <ion-row>
       <ion-col size="12">

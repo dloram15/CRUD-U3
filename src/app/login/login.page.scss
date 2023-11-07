@@ -1,0 +1,67 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    max-width: 400px;
+    height: 100%;
+    padding: 20px;
+    border: 2px solid #333;
+    background-color: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.username, .pass {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#icono-grande {
+    font-size: 100px;
+    color: #333;
+}
+
+.iconos-log {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.boton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.btn-grad {
+    background: linear-gradient(to right, #333333, #999999);
+    padding: 10px 20px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-grad:hover {
+    background: linear-gradient(to right, #999999, #333333);
+}
+

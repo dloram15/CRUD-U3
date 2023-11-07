@@ -4,6 +4,8 @@ import { CartService } from '../services/cart.service';
 import { Router } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { AlertController } from '@ionic/angular';
+import { UserService } from '../services/user.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-tab1',
@@ -11,8 +13,9 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-
+  public usuario: User ;
   public products: Product[] = [];
+  public usuarioAutenticado= false;
   public productsFounds: Product[] = [];
   public filter = [
     "Abarrotes",
@@ -40,7 +43,7 @@ export class Tab1Page {
     }
   ];
 
-  constructor(private alertController: AlertController,private cartService: CartService,private router:Router,private produc:ProductService) {
+  constructor(private alertController: AlertController,private cartService: CartService,private router:Router,private produc:ProductService, private user:UserService) {
     this.products.push({
       name: "Aguacate",
       price: 100,
@@ -71,6 +74,7 @@ export class Tab1Page {
     });
     this.productsFounds = this.produc.getProducts();
 
+    this.usuario = this.user.usuarioOnline;
   }
 
   public getColor(type: string): string {
@@ -124,6 +128,9 @@ export class Tab1Page {
     this.router.navigate(['/add-product']);
   }
   
+  public openLogin(){
+    this.router.navigate(['/login']);
+  }
   
   public openUpdateProductPage(pos:number){
     this.getpos(pos);
@@ -132,6 +139,29 @@ export class Tab1Page {
   
   public getpos(pos:number){
     this.produc.pos = pos;
+  }
+
+  ionViewDidEnter() {
+    this.refresh();
+  }
+
+  public refresh(){
+    this.usuario = this.user.usuarioOnline;
+    if (
+      this.usuario.username === '' &&
+      this.usuario.password === '' &&
+      this.usuario.photo === ''
+    ) {
+      this.usuarioAutenticado = false;
+    } else {
+      this.usuarioAutenticado = true;
+    }
+  }
+  public cerrarsesion(){
+    this.usuarioAutenticado = false;
+    this.user.usuarioOnline={username:'',password:'',photo:''};
+    this.usuario={username:'',password:'',photo:''};
+    this.router.navigate(['/login']);
   }
 
 }
